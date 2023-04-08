@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>Edit CV</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="icon" type="image/x-icon" href="images/weledi_home-removebg-preview.png">
+      <!-- style css -->
+      <link rel="stylesheet" href="css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="images/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+       <link rel="stylesheet" href="css/owl.carousel.min.css"> 
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="js/cv1.js"></script>
+<script src="js/cv2.js"></script>
+<script src="js/web1.js"></script>
+
+      <script>
+
+         var my_data = []; var myedu_data = []; var myexp_data = []; var myref_data = []; var myskills_data = []; 
+
+
+
+
+         function generatePDF() {
+            const { jsPDF } = window.jspdf;
+ 
+ var doc = new jsPDF('l', 'mm', [1500, 1400]);
+ var pdfjs = document.querySelector('#preview');
+
+ doc.html(pdfjs, {
+     callback: function(doc) {
+         doc.save("weledi-cv.pdf");
+     },
+     x: 12,
+     y: 12
+ });       
+   }
+
+   function find_choice()
+   {
+      var choice = parseInt(sessionStorage.getItem("choice"));
+
+      if(choice == 1)
+      {
+         check_done();
+      }
+
+      else if(choice == 2)
+      {
+         check_done2();
+      }
+      
+      else if(choice == 3)
+      {
+         check_done3();
+      }
+
+      else{
+       //  location.replace("../templates.html");
+      }
+   }
+         
+
+      </script>
+  
+  
+  
+   </head>
+   <!-- body -->
+   <body class="main-layout" onload="find_choice()">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#"/></div>
+      </div>
+      <!-- end loader -->
+      <!-- top -->
+                    <!-- header -->
+         <header class="header-area">
+            
+            <div class="container">
+               <div class="row d_flex">
+                  
+                  <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-9">
+                     <div class="navbar-area">
+                        <nav class="site-navbar">
+                           <ul>
+                              <li><a href="../index.html" >Home</a></li>
+                              
+               
+                           </ul>
+                           <button class="nav-toggler">
+                           <span></span>
+                           </button>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+      <!-- end header -->
+    
+     
+      
+   
+        <!-- protect -->
+      <div class="protect">
+         
+           <div class="protect_bg">
+         <div class="container">
+           
+             <div class="row">
+               <div class="col-md-12">
+                  <!--  Demos -->
+                  <div class="owl-carousel owl-theme">
+                     <div class="item">
+                        <div class="protect_box text_align_center" onclick="location.replace('personal_data.html')">
+                          <div class="desktop">
+                            <i><img src="images/undraw_Pic_profile_re_7g2h-removebg-preview.png" alt="#"/></i>
+                           <h3> Personal Information</h3>
+                           <h6>In this section, please provide your personal details including your name and contact information.</h6>
+                           
+                          </div>
+                           
+                        </div>
+                     </div>
+                     <div class="item" onclick="location.replace('bridge_education.html')">
+                        <div class="protect_box text_align_center">
+                          <div class="desktop">
+                             <i><img src="images/undraw_education_f8ru-removebg-preview.png" alt="#"/></i>
+                           <h3> Education</h3>
+                           <h6>In this section, please provide your personal details including your name and contact information.</h6>
+                          </div>
+                           
+                        </div>
+                     </div>
+                     <div class="item" onclick="location.replace('bridge_experience.html')" >
+                          <div class="protect_box text_align_center" id="experience_done">
+                          <div class="desktop">
+                             <i><img src="images/undraw_Booking_re_gw4j-removebg-preview.png" alt="#"/></i>
+                           <h3> Experience</h3>
+                           <h6>Share your professional experience with us and stand out to potential employers by highlighting your past work and accomplishments.</h6>
+                          </div>
+                           
+                        </div>
+                     </div>
+                     <div class="item" onclick="location.replace('skills.html')">
+                         <div class="protect_box text_align_center">
+                          <div class="desktop">
+                             <i><img src="images/undraw_electricity_k2ft-removebg-preview.png" alt="#"/></i>
+                           <h3> Skills</h3>
+                          <h6>Let us know about your skills and areas of expertise so we can help you build a strong profile that showcases your talents to potential employers</h6>
+                          </div>
+                           
+                        </div>
+                     </div>
+                     <div class="item" onclick="location.replace('bridge_referees.html')">
+                        <div class="protect_box text_align_center">
+                         <div class="desktop" id="item_referees">
+                            <i><img src="images/undraw_Agreement_re_d4dv-removebg-preview.png" alt="#"/></i>
+                          <h3> Referees</h3>
+                          <h6>In this section, please provide the contact information of individuals who can speak to your professional abilities, also known as referees. Referees are individuals who can provide insight into your work experience, skills, and character to potential employers.</h6>
+                        </div>
+                                             
+                       </div>
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+      </div>
+
+         </div>
+         
+      </div>
+      <!-- end protect -->
+      
+      <div class="protect" id="preview">   <!--Here is where we will output the preview-->
+
+      </div>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-12">
+               <div class="titlepage text_align_center">
+                 <!-- <a class="preview" href="#">Save</a> -->
+                 
+                 <a class="add_section" href="#preview" onclick="generatePDF()">Download PDF</a>
+                 
+               </div>
+            </div>
+         </div>
+      </div>
+    
+      <!--  footer -->
+      <footer>
+         <div class="footer">
+          
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-8 offset-md-2">
+                        <p>© 2023 All Rights Reserved. </p> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+      <script src="js/owl.carousel.min.js"></script>
+      <script src="js/custom.js"></script>
+   </body>
+</html>
