@@ -61,15 +61,12 @@
 
    function find_choice()
    {
-      var choice = parseInt(sessionStorage.getItem("choice"));
-     
+      
       //if entering via the apps
-      if(isNaN(choice))
-      {
          
-         choice = parseInt(decodeURIComponent(window.location.search.replace(/^.*?\=/,'')));
+        var choice = parseInt(decodeURIComponent(window.location.search.replace(/^.*?\=/,'')));
          sessionStorage.setItem("choice", choice);
-      }
+      
 
       if(choice == 1)
       {
