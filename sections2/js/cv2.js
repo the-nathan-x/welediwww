@@ -1,13 +1,13 @@
 function check_done2(){
 
-    sessionStorage.removeItem("count");
+    localStorage.removeItem("count");
 
 
 
     
-    my_data = JSON.parse(sessionStorage.getItem("my_data")); // retrieve the stored array from session storage and parse it back into an array
+    my_data = JSON.parse(localStorage.getItem("my_data")); // retrieve the stored array from local storage and parse it back into an array
 
-    if(JSON.parse(sessionStorage.getItem("my_data")) !== null)
+    if(JSON.parse(localStorage.getItem("my_data")) !== null)
     {
        //if my data is filled
 
@@ -104,9 +104,9 @@ document.getElementById("preview").innerHTML = html2;
 
 
  //checking if education section is done
-    myedu_data = JSON.parse(sessionStorage.getItem("myedu_data")); // retrieve the stored array from session storage and parse it back into an array
+    myedu_data = JSON.parse(localStorage.getItem("myedu_data")); // retrieve the stored array from local storage and parse it back into an array
    
-    if(JSON.parse(sessionStorage.getItem("myedu_data")) !== null)
+    if(JSON.parse(localStorage.getItem("myedu_data")) !== null)
     {
 
 
@@ -144,8 +144,8 @@ document.getElementById("preview").innerHTML = html2;
     }
 
     //checking if experience is done
-    myexp_data = JSON.parse(sessionStorage.getItem("myexp_data")); // retrieve the stored array from session storage and parse it back into an array
-    if(JSON.parse(sessionStorage.getItem("myexp_data")) !== null)
+    myexp_data = JSON.parse(localStorage.getItem("myexp_data")); // retrieve the stored array from local storage and parse it back into an array
+    if(JSON.parse(localStorage.getItem("myexp_data")) !== null)
     {
       // document.getElementById("experience_done").style.backgroundColor = "green";
       // document.getElementById("experience_done").innerHTML = "COMPLETED"
@@ -191,8 +191,8 @@ document.getElementById("preview").innerHTML = html2;
     
 
     //checking if skills is done
-    myskills_data = JSON.parse(sessionStorage.getItem("myskills_data")); // retrieve the stored array from session storage and parse it back into an array
-    if(JSON.parse(sessionStorage.getItem("myskills_data")) !== null)
+    myskills_data = JSON.parse(localStorage.getItem("myskills_data")); // retrieve the stored array from local storage and parse it back into an array
+    if(JSON.parse(localStorage.getItem("myskills_data")) !== null)
     {
       
       var skills = myskills_data[0].split(",");
@@ -229,8 +229,8 @@ document.getElementById("preview").innerHTML = html2;
 
 
     //checking if referees is done
-    myref_data = JSON.parse(sessionStorage.getItem("myref_data")); // retrieve the stored array from session storage and parse it back into an array
-    if(JSON.parse(sessionStorage.getItem("myref_data")) !== null)
+    myref_data = JSON.parse(localStorage.getItem("myref_data")); // retrieve the stored array from local storage and parse it back into an array
+    if(JSON.parse(localStorage.getItem("myref_data")) !== null)
     {
        
        html2 = html2 + `<section>

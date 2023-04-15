@@ -204,15 +204,15 @@ button:hover {
 
 
   function counting(){
-  count = parseInt(sessionStorage.getItem("count"));
-  times = parseInt(sessionStorage.getItem("number_of_schools"));
+  count = parseInt(localStorage.getItem("count"));
+  times = parseInt(localStorage.getItem("number_of_schools"));
   if(isNaN(count))
   {
     myedu_data[0] = times;
     count = 1;
   }
   else{
-     myedu_data = JSON.parse(sessionStorage.getItem("myedu_data")); // retrieve the stored array from session storage and parse it back into an array
+     myedu_data = JSON.parse(localStorage.getItem("myedu_data")); // retrieve the stored array from local storage and parse it back into an array
   }
     
     document.getElementById("counter").innerHTML = " "+count;
@@ -307,12 +307,12 @@ function nextPrev(n) {
     if(count < times){
 
       myedu_data[count]  = input_name + "---" + input_course + "---" + input_start_year + "---" + input_end_year;
-      sessionStorage.setItem("myedu_data", JSON.stringify(myedu_data)); // store the array in session storage as a string
+      localStorage.setItem("myedu_data", JSON.stringify(myedu_data)); // store the array in local storage as a string
 
       
 
       count++;
-      sessionStorage.setItem("count", count);
+      localStorage.setItem("count", count);
       document.getElementById("regForm").reset();
       
       location.reload();
@@ -327,13 +327,13 @@ function nextPrev(n) {
 
     myedu_data[count]  = input_name + "---" + input_course + "---" + input_start_year + "---" + input_end_year;
       
-    sessionStorage.setItem("myedu_data", JSON.stringify(myedu_data)); // store the array in session storage as a string
+    localStorage.setItem("myedu_data", JSON.stringify(myedu_data)); // store the array in local storage as a string
 
 
 
 
       console.log("Okay");
-      sessionStorage.removeItem("count");
+      localStorage.removeItem("count");
       location.replace("index.html");
       }, 2000); // delay the alert for 3 seconds (3000 milliseconds)
     }

@@ -205,15 +205,15 @@ button:hover {
 
 
   function counting(){
-  count = parseInt(sessionStorage.getItem("count"));
-  times = parseInt(sessionStorage.getItem("number_of_referees"));
+  count = parseInt(localStorage.getItem("count"));
+  times = parseInt(localStorage.getItem("number_of_referees"));
   if(isNaN(count))
   {
     myref_data[0] = times;
     count = 1;
   }
   else{
-     myref_data = JSON.parse(sessionStorage.getItem("myref_data")); // retrieve the stored array from session storage and parse it back into an array
+     myref_data = JSON.parse(localStorage.getItem("myref_data")); // retrieve the stored array from local storage and parse it back into an array
   }
     
     document.getElementById("counter").innerHTML = " "+count;
@@ -317,12 +317,12 @@ function nextPrev(n) {
     if(count < times){
 
       myref_data[count]  = referee_name + "---" + input_title + "---"  + input_company + "---"+ input_email + "---" + input_phone;
-      sessionStorage.setItem("myref_data", JSON.stringify(myref_data)); // store the array in session storage as a string
+      localStorage.setItem("myref_data", JSON.stringify(myref_data)); // store the array in local storage as a string
 
       
 
       count++;
-      sessionStorage.setItem("count", count);
+      localStorage.setItem("count", count);
       document.getElementById("regForm").reset();
       
       location.reload();
@@ -337,13 +337,13 @@ function nextPrev(n) {
 
       myref_data[count]  = referee_name + "---" + input_title + "---"  + input_company + "---"+ input_email + "---" + input_phone;
       
-      sessionStorage.setItem("myref_data", JSON.stringify(myref_data)); // store the array in session storage as a string
+      localStorage.setItem("myref_data", JSON.stringify(myref_data)); // store the array in local storage as a string
   
 
 
 
       console.log("Okay");
-      sessionStorage.removeItem("count");
+      localStorage.removeItem("count");
       location.replace("index.html");
       }, 2000); // delay the alert for 3 seconds (3000 milliseconds)
     }

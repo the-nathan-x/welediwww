@@ -61,14 +61,14 @@
 
    function find_choice()
    {
-      var choice = parseInt(sessionStorage.getItem("choice"));
+      var choice = parseInt(localStorage.getItem("choice"));
      
       //if entering via the apps
       if(isNaN(choice))
       {
          
          choice = parseInt(decodeURIComponent(window.location.search.replace(/^.*?\=/,'')));
-         sessionStorage.setItem("choice", choice);
+         localStorage.setItem("choice", choice);
       }
 
       if(choice == 1)
@@ -193,6 +193,7 @@
                <div class="titlepage text_align_center">
                  <!-- <a class="preview" href="#">Save</a> -->
                  
+                 <a class="add_section" href="#preview" onclick="localStorage.clear()">Start New</a>
                  <a class="add_section" href="#preview" onclick="generatePDF()">Download PDF</a>
                  
                </div>

@@ -141,7 +141,7 @@ button:hover {
   
     if(numberRegex.test(document.getElementById("number").value)){
     
-    sessionStorage.setItem("number_of_schools", parseInt(document.getElementById("number").value)); 
+    localStorage.setItem("number_of_schools", parseInt(document.getElementById("number").value)); 
     //alert(my_data[0]);
     document.getElementById("nextBtn").disabled = false;
     }
@@ -222,9 +222,9 @@ function nextPrev(n) {
     //everything is done
 
 
-sessionStorage.setItem("myskills_data", JSON.stringify(myskills_data)); // store the array in session storage as a string
+localStorage.setItem("myskills_data", JSON.stringify(myskills_data)); // store the array in local storage as a string
 
-const retrievedArray = JSON.parse(sessionStorage.getItem("myskills_data")); // retrieve the stored array from session storage and parse it back into an array
+const retrievedArray = JSON.parse(localStorage.getItem("myskills_data")); // retrieve the stored array from local storage and parse it back into an array
 
 console.log(retrievedArray); 
 

@@ -305,9 +305,9 @@ function nextPrev(n) {
     //everything is done
 
 
-sessionStorage.setItem("my_data", JSON.stringify(my_data)); // store the array in session storage as a string
+localStorage.setItem("my_data", JSON.stringify(my_data)); // store the array in local storage as a string
 
-const retrievedArray = JSON.parse(sessionStorage.getItem("my_data")); // retrieve the stored array from session storage and parse it back into an array
+const retrievedArray = JSON.parse(localStorage.getItem("my_data")); // retrieve the stored array from local storage and parse it back into an array
 
 console.log(retrievedArray); 
 
