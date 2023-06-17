@@ -30,12 +30,22 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 
+
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="js/cv1.js"></script>
 <script src="js/cv2.js"></script>
 <script src="js/web1.js"></script>
+<script src="js/cv3.js"></script>
+<script src="js/cv4.js"></script>
+<script src="js/cv5.js"></script>
+<script src="js/cv6.js"></script>
+<script src="js/cv7.js"></script>
+<script src="js/cv8.js"></script>
+<script src="js/cv9.js"></script>
+<script src="js/cv10.js"></script>
+<script src="js/cv11.js"></script>
 
       <script>
 
@@ -76,6 +86,11 @@
          check_done();
       }
 
+      else if(choice == 5)
+      {
+         check_done_5();
+      }
+
       else if(choice == 2)
       {
          check_done2();
@@ -85,9 +100,42 @@
       {
          check_done3();
       }
-
+      else if(choice == 4)
+      {
+         check_done4();
+      }
+      
+      else if(choice == 6)
+      {
+         check_done6();
+      }
+      else if(choice == 7)
+      {
+         check_done7();
+      }
+      else if(choice == 8)
+      {
+         check_done8();
+      }
+      else if(choice == 9)
+      {
+         check_done9();
+      }
+      else if(choice == 10)
+      {
+         check_done10();
+      }
+      else if(choice == 11)
+      {
+         check_done11();
+      }
+      else if(choice == 12)
+      {
+         check_done12();
+      }
+      
       else{
-       //  location.replace("../templates.html");
+         location.replace("../templates.html");
       }
    }
          
@@ -214,6 +262,8 @@
                <div class="titlepage text_align_center">
                  <!-- <a class="preview" href="#">Save</a> -->
                  
+                 <a class="add_section" href="../templates.html" >Change Template</a>
+
                  <a class="add_section" href="#preview" onclick="generatePDF()">Download PDF</a>
                  
                </div>
