@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weledi Call Billing</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #container {
+      display: flex;
+    }
+
+    #caller {
+      width: 85%;
+      height: 100vh;
+    }
+
+    #calculator {
+      width: 15%;
+      height: 100vh;
+      background-color: lightgray;
+    }
+
+    #invoice-form {
+      margin: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <iframe id="caller" src="caller.html" scrolling="no"></iframe>
+    <iframe id="calculator" src="calculator.html" scrolling="no"></iframe>
+  </div>
+
+  <script>
+    // Get the calculator iframe element
+    const calculatorFrame = document.getElementById('calculator');
+
+    // Listen for messages from the calculator iframe
+    window.addEventListener('message', (event) => {
+      // Check the origin of the message
+      if (event.origin !== window.location.origin) return;
+
+      // Handle the message data
+      const { type, data } = event.data;
+
+      if (type === 'invoiceData') {
+        // Save the invoice data to localStorage or perform other actions
+        localStorage.setItem('invoiceData', JSON.stringify(data));
+        console.log('Invoice data:', data);
+      }
+    });
+
+    // Handle iframe sizing
+    function resizeIframes() {
+      const windowHeight = window.innerHeight;
+      const callerHeight = windowHeight;
+      const calculatorHeight = windowHeight;
+
+      const callerFrame = document.getElementById('caller');
+      const calculatorFrame = document.getElementById('calculator');
+
+      callerFrame.style.height = `${callerHeight}px`;
+      calculatorFrame.style.height = `${calculatorHeight}px`;
+    }
+
+    window.addEventListener('resize', resizeIframes);
+    resizeIframes();
+  </script>
+</body>
+</html>

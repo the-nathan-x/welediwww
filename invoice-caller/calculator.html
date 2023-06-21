@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weledi Calculator</title>
+  <style>
+    /* CSS styles omitted for brevity */
+  </style>
+  
+</head>
+<body onload="document.getElementById('invoice-preview').hidden = true">
+  <div class="container">
+    <h1>Weledi Billing Calculator</h1>
+
+    <form id="calculator-form">
+      <label for="company-name">Company Name:</label>
+      <input type="text" id="company-name" required>
+
+      <label for="invoice-recipient">Invoice Recipient:</label>
+      <input type="text" id="invoice-recipient" required>
+
+      <label for="base-price">Base Price:</label>
+      <input type="number" id="base-price" min="0" step="1" required>
+
+      <label for="price-per-minute">Billing Price per Minute:</label>
+      <input type="number" id="price-per-minute" min="0" step="1" required>
+
+      <button type="submit">Generate Invoice</button>
+    </form>
+
+    <div id="call-timer">
+      <button id="start-timer">Start</button>
+      <button id="pause-timer">Pause</button>
+      <span id="timer">00:00:00</span>
+    </div>
+
+    <div id="invoice-preview">
+      <h2>Invoice Preview</h2>
+      <p><strong>Company Name:</strong> <span id="preview-company-name"></span></p>
+      <p><strong>Invoice Recipient:</strong> <span id="preview-invoice-recipient"></span></p>
+      <p><strong>Call Duration:</strong> <span id="preview-call-duration"></span> seconds</p>
+      <p><strong>Base Price:</strong> <span id="preview-base-price"></span>Tsh</p>
+      <p><strong>Billing Price per Minute:</strong> <span id="preview-price-per-minute">Tsh</span></p>
+      <p><strong>Total Price:</strong> <span id="preview-total-price"></span>Tsh</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('calculator-form');
+    const invoicePreview = document.getElementById('invoice-preview');
+    const startTimerButton = document.getElementById('start-timer');
+    const pauseTimerButton = document.getElementById('pause-timer');
+    const timerDisplay = document.getElementById('timer');
+
+    let timerInterval;
+    let callDuration = 0;
+
+    function startTimer() {
+      timerInterval = setInterval(updateTimer, 1000);
+      startTimerButton.disabled = true;
+      pauseTimerButton.disabled = false;
+    }
+
+    function pauseTimer() {
+      clearInterval(timerInterval);
+      startTimerButton.disabled = false;
+      pauseTimerButton.disabled = true;
+    }
+
+    function updateTimer() {
+      callDuration++;
+      const formattedDuration = formatTime(callDuration);
+      timerDisplay.textContent = formattedDuration;
+    }
+
+    function formatTime(timeInSeconds) {
+      const hours = Math.floor(timeInSeconds / 3600);
+      const minutes = Math.floor((timeInSeconds % 3600) / 60);
+      const seconds = timeInSeconds % 60;
+
+      return `${padNumber(hours)}:${padNumber(minutes)}:${padNumber(seconds)}`;
+    }
+
+    function padNumber(number) {
+      return String(number).padStart(2, '0');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const companyNameInput = document.getElementById('company-name');
+      const invoiceRecipientInput = document.getElementById('invoice-recipient');
+      const basePriceInput = document.getElementById('base-price');
+      const pricePerMinuteInput = document.getElementById('price-per-minute');
+
+      const companyName = companyNameInput.value;
+      const invoiceRecipient = invoiceRecipientInput.value;
+      const basePrice = parseFloat(basePriceInput.value);
+      const pricePerMinute = parseFloat(pricePerMinuteInput.value);
+
+      const totalPrice = basePrice + (callDuration / 60) * pricePerMinute;
+
+      document.getElementById('invoice-preview').hidden = false;
+
+      // Show invoice preview
+      document.getElementById('preview-company-name').textContent = companyName;
+      document.getElementById('preview-invoice-recipient').textContent = invoiceRecipient;
+      document.getElementById('preview-call-duration').textContent = callDuration;
+      //document.getElementById('preview-base-price').textContent = basePrice.toFixed(2);
+      //document.getElementById('preview-price-per-minute').textContent = pricePerMinute.toFixed(2);
+      //document.getElementById('preview-total-price').textContent = totalPrice.toFixed(2);
+
+      document.getElementById('preview-base-price').textContent = basePrice;
+      document.getElementById('preview-price-per-minute').textContent = pricePerMinute;
+      document.getElementById('preview-total-price').textContent = totalPrice;
+
+      invoicePreview.style.display = 'block';
+
+      // Generate and download invoice
+      generateInvoice();
+
+      // Send invoice data to the parent window
+      const invoiceData = {
+        companyName,
+        invoiceRecipient,
+        callDuration,
+        basePrice,
+        pricePerMinute,
+        totalPrice,
+      };
+
+      window.parent.postMessage({ type: 'invoiceData', data: invoiceData }, '*');
+    });
+
+    function generateInvoice() {
+      const companyName = document.getElementById('company-name').value;
+      const invoiceRecipient = document.getElementById('invoice-recipient').value;
+      const callDuration = document.getElementById('preview-call-duration').textContent;
+      const basePrice = document.getElementById('preview-base-price').textContent;
+      const pricePerMinute = document.getElementById('preview-price-per-minute').textContent;
+      const totalPrice = document.getElementById('preview-total-price').textContent;
+
+      const invoiceHTML = `<div class="cv-container">
+        <h2>Invoice</h2>
+        <p><strong>Company Name:</strong> ${companyName}</p>
+        <p><strong>Invoice Recipient:</strong> ${invoiceRecipient}</p>
+        <p><strong>Call Duration:</strong> ${callDuration} seconds</p>
+        <p><strong>Base Price:</strong> ${basePrice} Tsh</p>
+        <p><strong>Billing Price per Minute:</strong> ${pricePerMinute} Tsh</p>
+        <p><strong>Total Price:</strong> ${totalPrice} Tsh</p>
+      </div>`;
+
+      const blob = new Blob([invoiceHTML], { type: 'text/html' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      const invoiceFileName = 'invoice.html';
+      link.download = invoiceFileName;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+
+    startTimerButton.addEventListener('click', startTimer);
+    pauseTimerButton.addEventListener('click', pauseTimer);
+  </script>
+</body>
+</html>
